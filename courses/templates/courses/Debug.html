@@ -1,0 +1,127 @@
+<!--
+def signup(request):
+    if request.method=='GET':
+        form=RegistrationForm()
+        return render(request,"courses/signup.html",{'form':form})
+    
+    if request.method=='POST':
+        first_name=request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        username=request.POST.get('username')
+        email=request.POST.get('email')
+        password = request.POST.get('password')
+
+
+        user_obj = User(first_name = first_name ,last_name = last_name,username=username, email = email)
+        user_obj.set_password(password)
+        user_obj.save()
+
+        profile_obj = Profile.objects.create(user = user_obj )
+        profile_obj.save()
+        return redirect('login')
+
+
+    '''form=RegistrationForm(request.POST)
+    if(form.is_valid()):
+        user=form.save()
+        if(user):
+            return redirect('login')'''
+    return render(request,"courses/signup.html",{'form':form})
+-->
+
+
+
+
+
+<!--
+    from django.contrib.auth.forms import AuthenticationForm
+    from courses.forms import LoginForm
+    def login(request):
+        if(request.method=="GET"):
+          form1=LoginForm()      
+          return render(request,"courses/login.html",{'form1':form1})
+        if(request.method=="POST"):
+            form1=LoginForm(request= request ,data=request.POST)
+            if(form1.is_valid()):
+                print("Hi")
+                return redirect('home')
+            return render(request,"courses/login.html",{'form1':form1})
+    
+-->
+
+
+<!--
+            from django.contrib.auth.forms import UserCreationForm
+            from django.contrib.auth.models import User
+            from django import forms
+            from django.core.exceptions import ValidationError
+            
+            class RegistrationForm(UserCreationForm):
+                # Adding more user-friendly labels and widget customization for better styling
+                first_name = forms.CharField(
+                    max_length=30, 
+                    required=True, 
+                    widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
+                    label="First Name"
+                )
+                last_name = forms.CharField(
+                    max_length=30, 
+                    required=True, 
+                    widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
+                    label="Last Name"
+                )
+                email = forms.EmailField(
+                    max_length=40, 
+                    required=True,
+                    widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+                    label="Email Address"
+                )
+                
+                # Meta class to specify the model and fields
+                class Meta:
+                    model = User
+                    fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+                    # Add placeholders and Bootstrap classes to the default fields (username, password1, password2)
+                    widgets = {
+                        'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
+                        'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),
+                        'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}),
+                    }
+                
+                # Custom email validation to prevent duplicate email registration
+                def clean_email(self):
+                    email = self.cleaned_data.get('email')
+                    if User.objects.filter(email=email).exists():
+                        raise ValidationError("A user with this email already exists.")
+                    return email
+
+                    
+-->
+
+<!--
+
+                    from typing import Any
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django import forms
+from django.contrib.auth import authenticate,login
+from django.forms import ValidationError
+class LoginForm(AuthenticationForm):
+    username=forms.EmailField(max_length=40,required=True,label="Email Address:")
+
+    def clean(self):
+        email=self.cleaned_data['username']
+        password=self.cleaned_data['password']
+        user=None
+        try:
+            user=User.objects.get(email=email)
+            result=authenticate(username=user.username ,password=password)
+            if(result is not None):
+                login(self.request,result)
+                return result
+            else:
+                raise ValidationError("Email or Password Invalid")
+        except:
+            raise ValidationError("Email or Password Invalid")
+
+-->

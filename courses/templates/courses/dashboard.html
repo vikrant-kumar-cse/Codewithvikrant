@@ -1,0 +1,80 @@
+{% extends 'courses/base.html' %}{% load static %}{% load course_custom_tags %} {%block content %}
+<div class="container mt-5">
+
+    <h1 class="text-center mb-4">Your Enrolled Courses</h1>
+
+    {% if enrollments %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Course Name</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for enrollment in enrollments %}
+            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <div class="flex-grow-1">
+                    <h6>{{ enrollment.course.name }}</h6>
+                    <p class="mb-0 text-muted">Enrolled on {{ enrollment.date }}</p>
+                    <hr>
+                </div>
+                <div class="mt-2 mt-md-0">
+                    <a href="/course/{{ enrollment.course.slug }}" class="btn btn-primary btn-sm">Go To Course</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        You haven't enrolled in any courses yet.
+    </div>
+    {% endif %}
+
+    <h3>Your Test Results</h3>
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Score</th>
+                    <th>Correct Answers</th>
+                    <th>Wrong Answers</th>
+                    <th>Total Questions</th>
+                    <th>Percentage</th>
+                    <th>Time Taken (Seconds)</th>
+                    <th>Date Taken</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if test_results %} {% for result in test_results %}
+                <tr>
+                    <td>{{ result.course.name }}</td>
+                    <td>{{ result.score }}</td>
+                    <td>{{ result.correct_answers }}</td>
+                    <td>{{ result.wrong_answers }}</td>
+                    <td>{{ result.total_questions }}</td>
+                    <td>{{ result.percentage }}%</td>
+                    <td>{{ result.time_taken }}</td>
+                    <td>{{ result.date_taken|date:"Y-m-d H:i" }}</td>
+                </tr>
+                {% if result.percentage >= 80 %}
+                <tr>
+                    <td colspan="8">
+                        <div class="text-center">
+                            <a href="https://forms.gle/J2jjsD3Uhy3ib55NA" class="btn btn-success mt-2">Download Your Certificate</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %} {% endfor %} {% else %}
+                <tr>
+                    <td colspan="8">No test results available.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+{%endblock%} {% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/dashboard.css' %}"> {% endblock %}

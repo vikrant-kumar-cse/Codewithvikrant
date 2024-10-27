@@ -1,0 +1,18 @@
+.card {
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.list-group-item {
+    border: none;
+    background-color: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}

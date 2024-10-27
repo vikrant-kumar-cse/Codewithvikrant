@@ -1,0 +1,224 @@
+ {% extends 'courses/base.html' %} {% load static %}{% load course_custom_tags %} {% block title %} courses {% endblock %} {% block Imageslider %}
+<div class="container-fluid">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 50vh;">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <!-- First Slide -->
+            <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHRlY2hub2xvZ3l8ZW58MHx8fHwxNjU2NzI5NzQw&ixlib=rb-1.2.1&q=80&w=1080'); height: 50vh; background-repeat: no-repeat; background-size: cover; background-position: center;">
+                <h2 style="text-align: center; color: lawngreen; padding-top: 20vh;">
+                    <span class="auto-type" style="border-bottom: 4px solid black;"></span>
+                </h2>
+            </div>
+
+            <!-- Second Slide -->
+            <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080'); height: 50vh; background-repeat: no-repeat; background-size: cover; background-position: center;">
+                <h2 style="text-align: center; color: blue; padding-top: 20vh;">
+                    <span class="auto-type" style="border-bottom: 4px solid black;"></span>
+
+                </h2>
+            </div>
+
+            <!-- Third Slide -->
+            <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHRlY2hub2xvZ3l8ZW58MHx8fHwxNjU2NzI5NzQw&ixlib=rb-1.2.1&q=80&w=1080'); height: 50vh; background-repeat: no-repeat; background-size: cover; background-position: center;">
+                <h2 style="text-align: center; color: blue; padding-top: 20vh;">
+                    <span class="auto-type"></span>
+                </h2>
+            </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %} {%block content %}
+<div class="container-fluid bg-transparent">
+
+    <div style="text-align: center; margin: 20px auto; background-color: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); max-width: 800px;">
+        <label style="font-family: Arial, sans-serif; display: block; margin-bottom: 15px;">
+            <b style="font-size: 24px; color: #4CAF50;">Welcome,</b>
+            <p style="color: #333; font-size: 20px; font-weight: bold; display: inline-block; background-color: #e0ffe0; padding: 8px 15px; border-radius: 6px; margin-top: 8px;">
+                {{ request.user }}
+            </p>
+        </label>
+
+        <marquee behavior="scroll" direction="left" scrollamount="6" style="color: #ff5722; font-size: 18px; font-weight: bold; background-color: #fff8e1; padding: 8px 15px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+            Enroll in a course and Boost your Knowledge!
+        </marquee>
+
+        <hr style="border: 1px solid #ddd; width: 80%; margin: 15px auto;">
+    </div>
+
+
+
+    </label>
+    <div class="row bg-info p-4 rounded shadow-lg" style="max-height: 500px; overflow-y: auto; border: 2px solid #007bff; position: relative;">
+        {% for course in courses %}
+        <div class="col">
+            <div class="card mt-3 ml-2 shadow-none p-3 mb-5 rounded" style="width: 18rem; background-color: #e3f2fd;">
+                <img src="{{course.thumbnail.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{course.name}}</h5>
+                    <p class="card-text">{{course.description}}</p>
+                    <p class="card-text">
+                        <p>Save {{course.discount}}%</p>
+                        <b>
+                        <span><del>{{course.price|rupee}}</del>
+                            &nbsp;
+                            <span>{% cal_sellprice course.price course.discount as value %}{{value|rupee}}</span>
+                        </span>
+                    </b>
+                    </p>
+                </div>
+                <div class="card-footer p-0">
+                    <div class="row no-gutters">
+                        <div class="col border">
+                            <a href="/enroll/{{course.slug}}" class="btn btn-danger btn-block">Enroll Now</a>
+                        </div>
+                        <div class="col border">
+                            <a href="/course/{{course.slug}}" class="btn btn-light btn-block">Show More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!--{% for course in courses %}
+    <div class="container-fluid">
+        <a href="/Test/{{course.slug}}" class="btn btn-light btn btn-block">Test</a>
+    </div>
+    {% endfor %}-->
+
+</div>
+<div class="container mt-5" id="whyjoin">
+    <h2 class="text-center mb-4">Why You Should Join This Course</h2>
+    <div class="card shadow">
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Master the Fundamentals:</strong> This course provides a strong foundation in coding, ensuring you understand essential concepts that will serve as building blocks for your future learning.
+                </li>
+                <li class="list-group-item">
+                    <strong>Interactive Learning Experience:</strong> Our engaging teaching methods and hands-on projects make learning fun and effective, allowing you to apply concepts in real-time.
+                </li>
+                <li class="list-group-item">
+                    <strong>Supportive Community:</strong> Join a vibrant community of learners where you can share ideas, ask questions, and collaborate on projects, enhancing your learning experience.
+                </li>
+                <li class="list-group-item">
+                    <strong>Flexible Learning:</strong> With on-demand access to course materials, you can learn at your own pace, fitting your studies around your schedule.
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Get a Certificate Upon Completion:</strong> Receive a certificate after completing the course to showcase your achievement and boost your resume.
+                </li>
+
+                <a href="{% static 'courses\image\Certificate for Vikrant Kumar  for _Certificate Exam_.pdf' %}" class="btn btn-primary" download>
+                    Click TO Watch Certificate View.....
+                  </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="div" id="portfolio">
+    <header>
+        <div class="container">
+            <h1 class="logo">My Portfolio</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <!-- Add your image -->
+                <img src="{% static 'courses\image\MyImage.jpg' %}" alt="Your Name" class="profile-image" style="width:160px; height:150px; border-radius:50%;">
+                <p>Hello! I'm a passionate backend developer specializing in Django. I enjoy building efficient and scalable web applications. With a knack for solving complex problems, I focus on creating seamless user experiences. Apart from coding, I
+                    have a deep interest in AI and machine learning.</p>
+            </div>
+        </div>
+        <div class="container">
+            <!-- Link to Download Resume -->
+            <a href="{% static 'courses\image\Vikrant_Resume[1].pdf' %}" class="btn btn-primary" download>
+    Download Resume
+  </a>
+
+        </div>
+    </section>
+
+
+    <section id="projects">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="project-card">
+                <h3>Abacus Club Website</h3>
+                <p>A Django-based website for managing the Abacus Club. Features include user authentication and secure session management.</p>
+            </div>
+            <div class="project-card">
+                <h3>Railmadad Platform</h3>
+                <p>AI integration for managing complaints on the Railmadad platform. The system connects AI models with web forms for better complaint handling.</p>
+            </div>
+            <div class="project-card">
+                <h3>E-Learning Platform</h3>
+                <p>A student e-learning platform that allows course enrollments, tracks progress, and provides dashboards for performance results.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>If you'd like to collaborate or just say hello, feel free to reach out!</p>
+            <a href="mailto:your-email@example.com" class="contact-btn">Email Me</a>
+            <p>Or call me at: <a href="tel:+916200386057" class="contact-phone">6200386057</a></p>
+        </div>
+    </section>
+
+
+</div>
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/scrollbar.css' %}">
+<link rel="stylesheet" href="{% static 'courses/css/portfolio.css' %}">
+<link rel="stylesheet" href="{% static 'courses/css/whyjoin.css' %}"> {% endblock %} {% endblock %} {% block js %}
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+<script>
+    var typed = new Typed(".auto-type", {
+        strings: ["Developer & Coder"],
+        typeSpeed: 150,
+        backSpeed: 150,
+        loop: true
+    })
+</script>
+{% endblock %}

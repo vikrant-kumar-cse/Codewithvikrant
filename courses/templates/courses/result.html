@@ -1,0 +1,22 @@
+{% extends 'courses/base.html' %} {% load course_custom_tags %} {% block title %} courses {% endblock %} {%block content %}
+<div class="container d-flex justify-content-center">
+
+    <div align="center" class="card-columns d-flex justify-content-center" style="padding: 10px; margin: 20px; ">
+        <div class="card" align="centre " style="width: 32rem; border:5px black solid">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080
+" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Score: {{score}}</h5>
+
+                <p class="card-text">Percentage: {{percent}}%</p>
+                <p class="card-text">Time Taken: {{time}} seconds</p>
+                <p class="card-text">Correct answers: {{correct}}</p>
+                <p class="card-text">Incorrect answers: {{wrong}}</p>
+                <p class="card-text">Total questions: {{total}}</p>
+                <h5>All the best for next quiz!</h5>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}

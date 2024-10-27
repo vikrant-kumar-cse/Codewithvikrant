@@ -1,0 +1,41 @@
+{% extends 'courses/base.html' %} {% load course_custom_tags %} {% block title %} courses {% endblock %} {%block content %}
+<div class="container">
+    <hr>
+    <p>You are going to Entroll In This Course {{course.name}}</p>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{course.thumbnail.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{course.name}}</h5>
+                    <p class="card-text">{{course.description}}</p>
+                    <p class="card-text">
+                        <p>Save {{course.discount}}%</p>
+                        <b>
+                            <!--₹-->
+                            <span><del>{{course.price|rupee}}</del>
+                                &nbsp;
+                                <span>{% cal_sellprice course.price course.discount as value %}{{ value|rupee }}</span>
+
+                            </span>
+                           
+                        </b>
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+
+            <h2>Enroll The Course</h2>
+
+            <form method="post">
+                {% csrf_token %} {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Enroll The Course</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
