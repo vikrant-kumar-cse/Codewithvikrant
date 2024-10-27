@@ -45,7 +45,7 @@ SECRET_KEY = 'django-insecure-2*)uzmcfb*dib6#b%c#!y)7snx9te#lo3e3n(%i#7ofkrqsnje
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise here
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -173,6 +174,15 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL="/media/"
 MEDIA_ROOT= BASE_DIR
+STATICFILES_DIRS=[BASE_DIR/'static']
+STATIC_ROOT=BASE_DIR / "staticfiles"
+
+
+# Enable WhiteNoise compression
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
 
 
 # Default primary key field type
