@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +45,6 @@ SECRET_KEY = 'django-insecure-2*)uzmcfb*dib6#b%c#!y)7snx9te#lo3e3n(%i#7ofkrqsnje
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -76,7 +76,7 @@ ROOT_URLCONF = 'Codewithvikrant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,6 +88,50 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 WSGI_APPLICATION = 'Codewithvikrant.wsgi.application'
 
@@ -108,10 +152,17 @@ DATABASES = {
 
 import dj_database_url
 
+from django.conf import settings
+
 DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
-    
+    'default': dj_database_url.parse(
+        env('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True  # This ensures SSL is required
+    )
 }
+
+
 
 
 
@@ -171,11 +222,45 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-#MEDIA_URL="/media/"
-#MEDIA_ROOT= BASE_DIR
-STATICFILES_DIRS=[BASE_DIR / 'static']
-STATIC_ROOT=BASE_DIR / "staticfiles"
+#STATIC_URL = 'static/'
+MEDIA_URL="/media/"
+MEDIA_ROOT= BASE_DIR
+#STATIC_DIRS=[BASE_DIR / 'static']
+#STATIC_ROOT= BASE_DIR /"staticfiles"
+
+
+#STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+from pathlib import Path
+
+# Base directory
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# URL to use when referring to static files located in STATIC_ROOT
+STATIC_URL = '/static/'
+
+# Add static files directories
+STATICFILES_DIRS = [
+    BASE_DIR / 'courses' / 'static',  # Include the static directory
+]
+
+# Collect static files in this directory for production
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Or your desired static root path
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Enable WhiteNoise compression

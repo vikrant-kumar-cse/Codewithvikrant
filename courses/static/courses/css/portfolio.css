@@ -1,5 +1,7 @@
 /* General Styles */
 
+
+/*
 .container {
     max-width: 1200px;
     margin: auto;
@@ -40,7 +42,7 @@ header ul li a:hover {
 }
 
 
-/* About Section */
+
 
 #about {
     background: #fff;
@@ -59,7 +61,6 @@ header ul li a:hover {
 }
 
 
-/* Projects Section */
 
 #projects {
     background: #eee;
@@ -90,7 +91,6 @@ header ul li a:hover {
 }
 
 
-/* Contact Section */
 
 #contact {
     background: #333;
@@ -132,4 +132,4 @@ header ul li a:hover {
 
 .contact-phone:hover {
     color: #e55337;
-}
+}*/

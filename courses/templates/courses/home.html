@@ -72,7 +72,7 @@
         {% for course in courses %}
         <div class="col">
             <div class="card mt-3 ml-2 shadow-none p-3 mb-5 rounded" style="width: 18rem; background-color: #e3f2fd;">
-                <img src="{{course.thumbnail.url}}" class="card-img-top" alt="...">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHRlY2hub2xvZ3l8ZW58MHx8fHwxNjU2NzI5NzQw&ixlib=rb-1.2.1&q=80&w=1080" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{course.name}}</h5>
                     <p class="card-text">{{course.description}}</p>
@@ -137,6 +137,161 @@
         </div>
     </div>
 </div>
+<style>
+    /* General Styles */
+    
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 0px;
+    }
+    
+    header {
+        color: #fff;
+        padding: 30px 0;
+    }
+    
+    header .logo {
+        float: left;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    header nav {
+        float: right;
+    }
+    
+    header ul {
+        list-style: none;
+    }
+    
+    header ul li {
+        display: inline;
+        margin-left: 20px;
+    }
+    
+    header ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    header ul li a:hover {
+        color: #f4f4f4;
+    }
+    /* About Section */
+    
+    #about {
+        background: #fff;
+        padding: 50px 0;
+        text-align: center;
+    }
+    
+    #about h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    
+    #about p {
+        font-size: 18px;
+        color: #555;
+    }
+    /* Projects Section */
+    
+    #projects {
+        background: #eee;
+        padding: 50px 0;
+    }
+    
+    #projects h2 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .project-card {
+        background: #fff;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-card h3 {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+    
+    .project-card p {
+        color: #555;
+    }
+    /* Contact Section */
+    
+    #contact {
+        background: #333;
+        color: #fff;
+        padding: 50px 0;
+        text-align: center;
+    }
+    
+    #contact h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    
+    #contact p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+    
+    .contact-btn {
+        display: inline-block;
+        background: #ff6347;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    
+    .contact-btn:hover {
+        background: #e55337;
+    }
+    
+    .contact-phone {
+        display: inline-block;
+        margin-top: 10px;
+        color: #ff6347;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .contact-phone:hover {
+        color: #e55337;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,7 +315,7 @@
             <h2>About Me</h2>
             <div class="about-content">
                 <!-- Add your image -->
-                <img src="{% static 'courses\image\MyImage.jpg' %}" alt="Your Name" class="profile-image" style="width:160px; height:150px; border-radius:50%;">
+                <img src="https://yt3.googleusercontent.com/AAnGK4-D1BQZAWaXvAzUfmw7cZjeQYfn7gW1PIPvMNlz34ZnNLM-3PaNy4ODdr1ie0pd_gLE=s900-c-k-c0x00ffffff-no-rj" alt="Your Name" class="profile-image" style="width:160px; height:150px; border-radius:50%;">
                 <p>Hello! I'm a passionate backend developer specializing in Django. I enjoy building efficient and scalable web applications. With a knack for solving complex problems, I focus on creating seamless user experiences. Apart from coding, I
                     have a deep interest in AI and machine learning.</p>
             </div>
